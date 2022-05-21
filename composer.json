@@ -1,0 +1,19 @@
+{
+    "name": "abdu/paymentgateway",
+    "description": "this is a package for PHP (Laravel ) developers to interate their system to our payment gateway",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Abdu\\Paymentgateway\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "abduselam1",
+            "email": "abduselamhafiz@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
