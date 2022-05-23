@@ -14,9 +14,9 @@ after creating an acount goto the app page and create your app
 in your .env file put your credentials
 
 ```
-PAYMENT_GATEWAY_KEY = key
-PAYMENT_GATEWAY_USERNAME = username
-PAYMENT_GATEWAY_PASSWORD = **********
+PAYMENT_GATEWAY_KEY=key
+PAYMENT_GATEWAY_USERNAME=username
+PAYMENT_GATEWAY_PASSWORD=**********
 
 ```
 And check in your config/app.php file that the _cipher property set to _AES-256-CBC
@@ -35,15 +35,15 @@ public function showBalance(){
 }
 ```
 
-#functions
+# functions
 
-##checkout
+## checkout
 
 If you need your customer to pay you call this function
 
-`$payment->checkout($data)`
+` $payment->checkout($data) `
 
-###parameters
+### parameters
 #### data _required
 you have to set an array of data that contain amount and redirect_url
 ```
@@ -54,14 +54,14 @@ $data = [
 ```
 
 
-##queryBalance
+## queryBalance
 whenever you need to query your balance call this method no parameter needed
-`$payment->queryBalance()`
+` $payment->queryBalance() `
 
 ##getInvoice
 Every time you need a single invoice fire this method
-`$payment->getInvoice($transaction_id)`
-###parameters
+` $payment->getInvoice($transaction_id) `
+### parameters
 #### transaction_id _required
 you have to set an int of transaction id 
 
