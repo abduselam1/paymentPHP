@@ -21,6 +21,7 @@ class Payment
             'amount' => $amount,
             'redirect_url' => $redirect_url,
         ];
+        $data = json_encode($data);
         $new_encrypter = new Encrypter($key, config('app.cipher'));
         $encrypted_data = $new_encrypter->encrypt($data);
         $checkIfTheCredentialExist = Http::post(
@@ -155,6 +156,7 @@ class Payment
             'address' => $address,
             'amount' => $amount
         ];
+        $data = json_encode($data);
         $new_encrypter = new Encrypter($key, config('app.cipher'));
         $encrypted_data = $new_encrypter->encrypt($data);
         $send = Http::get(
