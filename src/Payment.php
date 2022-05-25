@@ -107,39 +107,24 @@ class Payment
 
      */
 
-    public function invoice(string $start = null, string $end = null, int $year = null, bool $paginate = false, $paginatePerpage = 10)
+    public function invoice(int $year = null, bool $paginate = false, $paginatePerpage = 10)
     {
 
         $username = env("PAYMENT_GATEWAY_USERNAME");
         $password = env("PAYMENT_GATEWAY_PASSWORD");
 
         $invoice = null;
-        if ($paginate == false) {
+        
             $invoice = Http::get(
                 "$this->endPoint/invoice",
                 [
                     'username' => $username,
                     'password' => $password,
-                    'start' => $start,
-                    'end' => $end,
                     'year' => $year,
+                    'paginate' => $paginate,
                     'perpage' => $paginatePerpage
                 ]
             );
-        } else {
-            $invoice = Http::get(
-                "$this->endPoint/invoice",
-                [
-                    'username' => $username,
-                    'password' => $password,
-                    'start' => $start,
-                    'end' => $end,
-                    'year' => $year,
-                    'paginate' => true,
-                    'perpage' => $paginatePerpage
-                ]
-            );
-        }
 
         return [
             'status' => $invoice->status(),
