@@ -10,7 +10,7 @@ class Payment
 {
     public $endPoint = 'http://localhost:8050/api';
 
-    public function checkout(float $amount,string $redirect_url)
+    public function checkout(float $amount,string $redirect_url,$error_redirect_url)
     {
 
         // try {
@@ -38,15 +38,15 @@ class Payment
         }
         // dd($checkIfTheCredentialExist->body());
 
-        return $this->proccedPayment(json_decode($checkIfTheCredentialExist->body()), $data['redirect_url']);
+        return $this->proccedPayment(json_decode($checkIfTheCredentialExist->body()), $redirect_url,$error_redirect_url);
     
     }
-    public function proccedPayment($transaction, $redirect_url)
+    public function proccedPayment($transaction, $redirect_url,$error_redirect_url)
     {
         // dd($transaction);
 
 
-        return Redirect::to("http://localhost:8050/pay/" . $transaction->id . '?redirectTo=' . $redirect_url);
+        return Redirect::to("http://localhost:8050/pay/" . $transaction->id . '?redirectTo=' . $redirect_url."&errorRedirectTo=$error_redirect_url");
         // return redirect('https://google.com');
     }
 

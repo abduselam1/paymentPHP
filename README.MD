@@ -41,17 +41,17 @@ public function showBalance(){
 
 If you need your customer to pay you call this function
 
-` $payment->checkout($data) `
+` $payment->checkout($amount,$redirect_url,error_redirectt_url) `
 
 ### parameters
-#### data _required
-you have to set an array of data that contain amount and redirect_url
-```
-$data = [
-    'amount' => 322.5,
-    'redirect_url' => https://example.com/checkout/
-]
-```
+#### amount _required | float
+you have to set an amonut of money that you need to accept from your client 
+
+### redirect_url required | string
+a return url after a successful operation
+
+### error_redirect_url required | string
+a return url after a failed operation
 
 
 ## queryBalance
