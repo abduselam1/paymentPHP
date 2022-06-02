@@ -2,7 +2,7 @@
 
 this is a package for PHP (Laravel ) developers to interate their system to our payment gateway
 
-before using the package please goto our website and register as a merchant
+before using the package please goto our [website](https://payment.hager-bet.com/) and register as a merchant
 
 after creating an acount goto the app page and create your app
 
