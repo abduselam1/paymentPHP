@@ -25,7 +25,7 @@ And check in your config/app.php file that the _cipher property set to _AES-256-
 
 In your controller import the package
 
-```
+```php
 use Abdu\Paymentgateway\Payment;
 
 public function showBalance(){
