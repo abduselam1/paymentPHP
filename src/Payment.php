@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Redirect;
 
 class Payment
 {
-    public $endPoint = 'http://localhost:8050/api';
+    public $endPoint = 'https://payment.hager-bet.com/api';
 
-    public function checkout(float $amount,string $redirect_url,$error_redirect_url)
+    public function checkout(float $amount, string $redirect_url, $error_redirect_url)
     {
 
         // try {
@@ -39,15 +39,14 @@ class Payment
         }
         // dd($checkIfTheCredentialExist->body());
 
-        return $this->proccedPayment(json_decode($checkIfTheCredentialExist->body()), $redirect_url,$error_redirect_url);
-    
+        return $this->proccedPayment(json_decode($checkIfTheCredentialExist->body()), $redirect_url, $error_redirect_url);
     }
-    public function proccedPayment($transaction, $redirect_url,$error_redirect_url)
+    public function proccedPayment($transaction, $redirect_url, $error_redirect_url)
     {
         // dd($transaction);
 
 
-        return Redirect::to("http://localhost:8050/pay/" . $transaction->id . '?redirectTo=' . $redirect_url."&errorRedirectTo=$error_redirect_url");
+        return Redirect::to("https://payment.hager-bet.com/pay/" . $transaction->id . '?redirectTo=' . $redirect_url . "&errorRedirectTo=$error_redirect_url");
         // return redirect('https://google.com');
     }
 
@@ -57,7 +56,7 @@ class Payment
         $password = env("PAYMENT_GATEWAY_PASSWORD");
 
 
-        $balance = Http::get(
+        $balance = Http::post(
             "$this->endPoint/balance/query",
             [
                 'username' => $username,
@@ -81,7 +80,7 @@ class Payment
         $username = env("PAYMENT_GATEWAY_USERNAME");
         $password = env("PAYMENT_GATEWAY_PASSWORD");
 
-        $invoice = Http::get(
+        $invoice = Http::post(
             "$this->endPoint/invoice/$invoice_id",
             [
                 'username' => $username,
@@ -114,17 +113,17 @@ class Payment
         $password = env("PAYMENT_GATEWAY_PASSWORD");
 
         $invoice = null;
-        
-            $invoice = Http::get(
-                "$this->endPoint/invoice",
-                [
-                    'username' => $username,
-                    'password' => $password,
-                    'year' => $year,
-                    'paginate' => $paginate,
-                    'perpage' => $paginatePerpage
-                ]
-            );
+
+        $invoice = Http::post(
+            "$this->endPoint/invoice",
+            [
+                'username' => $username,
+                'password' => $password,
+                'year' => $year,
+                'paginate' => $paginate,
+                'perpage' => $paginatePerpage
+            ]
+        );
 
         return [
             'status' => $invoice->status(),
@@ -144,7 +143,7 @@ class Payment
         $data = json_encode($data);
         $new_encrypter = new Encrypter($key, config('app.cipher'));
         $encrypted_data = $new_encrypter->encrypt($data);
-        $send = Http::get(
+        $send = Http::post(
             "$this->endPoint/send",
             [
                 'username' => $username,
