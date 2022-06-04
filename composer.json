@@ -19,7 +19,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Abdu\\Paymentgateway\\PaymentServiceProvider"
+                "Abdu\\PaymentGateway\\PaymentServiceProvider"
             ]
         }       
     }
